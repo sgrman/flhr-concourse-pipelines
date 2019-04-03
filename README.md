@@ -45,7 +45,7 @@ services:
     - PGDATA=/database
 
   concourse-web:
-    image: concourse/concourse:4.2.1
+    image: concourse/concourse:5.0.0
     command: web
     links: [concourse-db]
     depends_on: [concourse-db]
@@ -56,12 +56,13 @@ services:
     - CONCOURSE_POSTGRES_USER=concourse_user
     - CONCOURSE_POSTGRES_PASSWORD=concourse_pass
     - CONCOURSE_POSTGRES_DATABASE=concourse
-    - CONCOURSE_EXTERNAL_URL=http://CHANGEME:8080/
+    - CONCOURSE_EXTERNAL_URL=http://fly.vballin.com:8080/
     - CONCOURSE_ADD_LOCAL_USER=nsx:vmware
-    - CONCOURSE_MAIN_TEAM_ALLOW_ALL_USERS=true
+    #- CONCOURSE_MAIN_TEAM_ALLOW_ALL_USERS=true #used for 4.2.3
+    - CONCOURSE_MAIN_TEAM_LOCAL_USER=nsx
 
   concourse-worker:
-    image: concourse/concourse:4.2.1
+    image: concourse/concourse:5.0.0
     command: worker
     privileged: true
     links: [concourse-web]
@@ -70,7 +71,7 @@ services:
     environment:
     - CONCOURSE_TSA_HOST=concourse-web:2222
     - CONCOURSE_GARDEN_NETWORK
-    - CONCOURSE_GARDEN_DNS_SERVER=CHANGEME
+    - CONCOURSE_GARDEN_DNS_SERVER=192.168.64.10
 
   nginx:
     image: nginx:stable-alpine
@@ -84,7 +85,17 @@ services:
     #- ./nginx/proxy.conf:/etc/nginx/proxy.conf:ro
     ports:
      - "80:80"
-     - "443:443"    
+     - "443:443"
+
+  cors-proxy:
+    image: rroque99/cors-proxy
+    ports:
+     - "8020:8020"
+
+  nsx-t-pipeline-ui:
+    image: rroque99/nsx-t-pipeline-ui
+    ports:
+     - "8010:80"  
  ```
 
 5. Now you're ready to standup Concourse with docker-compose.
