@@ -4,28 +4,28 @@ opsman_major_minor_version: ^2\.4.*$    # PCF Ops Manager minor version to track
 pks_major_minor_version: ^1\.3.3       # Use this once PKS v1.1 becomes GA
 
 # vCenter configuration
-vcenter_host: vlab-vcsa.vballin.com       # vCenter host or IP
+vcenter_host: vc01.flhrnet.local       # vCenter host or IP
 vcenter_usr: administrator@vsphere.local  # vCenter username. If user is tied to a domain, then escape the \, example `domain\\user`
-vcenter_pwd: "VMware1!"                   # vCenter password
-vcenter_data_center: vlab-dc       # vCenter datacenter
+vcenter_pwd: "VMware1!!"                   # vCenter password
+vcenter_data_center: FLHRNET       # vCenter datacenter
 vcenter_insecure: 1                # vCenter skip TLS cert validation; enter `1` to disable cert verification, `0` to enable verification
 vcenter_ca_cert:                   # vCenter CA cert at the API endpoint; enter a value if `vcenter_insecure: 0`
 
 # Ops Manager VM configuration
 om_vm_host: 172.31.0.2                          # Optional - vCenter host to deploy Ops Manager in
-om_data_store: vlab-nfs-ds-ssd                  # vCenter datastore name to deploy Ops Manager in
-opsman_domain_or_ip_address: vlab-opsman.vballin.com  # FQDN to access Ops Manager without protocol (will use https), ex: opsmgr.example.com
+om_data_store: FLHRNET_NFS01                    # vCenter datastore name to deploy Ops Manager in
+opsman_domain_or_ip_address: opsman.flhrnet.local  # FQDN to access Ops Manager without protocol (will use https), ex: opsmgr.example.com
 opsman_admin_username: admin                    # Username for Ops Manager admin account
 opsman_admin_password: "VMware1!"               # Password for Ops Manager admin account
 om_ssh_pwd: "VMware1!"                          # SSH password for Ops Manager (ssh user is ubuntu)
 om_decryption_pwd: "VMware1!"                   # Decryption password for Ops Manager exported settings
 om_ntp_servers: us.pool.ntp.org                 # Comma-separated list of NTP Servers
-om_dns_servers: 192.168.64.60                   # Comma-separated list of DNS Servers
+om_dns_servers: 10.0.1.250                  # Comma-separated list of DNS Servers
 om_gateway: 172.31.0.1                          # Gateway for Ops Manager network
 om_netmask: 255.255.255.0                       # Netmask for Ops Manager network
 om_ip: 172.31.0.2                               # IP to assign to Ops Manager VM
-om_vm_network: ls-pks-mgmt                     # vCenter network name to use to deploy Ops Manager in
-om_vm_name: vlab-opsman                         # Name to use for Ops Manager VM
+om_vm_network: pks-mgmt                     # vCenter network name to use to deploy Ops Manager in
+om_vm_name: opsman                         # Name to use for Ops Manager VM
 opsman_disk_type: "thin"                        # Disk type for Ops Manager VM (thick|thin)
 om_vm_power_state: true                         # Whether to power on Ops Manager VM after creation
 #om_vm_folder:                                   # Leave it blank
@@ -34,10 +34,10 @@ om_vm_power_state: true                         # Whether to power on Ops Manage
 # Possible formats:
 #   cluster:       /<Data Center Name>/host/<Cluster Name>
 #   resource pool: /<Data Center Name>/host/<Cluster Name>/Resources/<Resource Pool Name>
-om_resource_pool: vlab-pks-mgmt-01
+om_resource_pool: pks-mgmt
 
-ephemeral_storage_names: vlab-nfs-ds-ssd    # Ephemeral Storage names in vCenter for use by PCF
-persistent_storage_names: vlab-nfs-ds-ssd   # Persistent Storage names in vCenter for use by PCF
+ephemeral_storage_names: FLHRNET_NFS01    # Ephemeral Storage names in vCenter for use by PCF
+persistent_storage_names: FLHRNET_NFS01   # Persistent Storage names in vCenter for use by PCF
 
 bosh_vm_folder: "pks_vms"                 # vSphere datacenter folder (such as pcf_vms) where VMs will be placed
 bosh_template_folder: "pks_templates"     # vSphere datacenter folder (such as pcf_templates) where templates will be placed
@@ -48,16 +48,16 @@ vm_disk_type: "thin"          # Disk type for BOSH provisioned VM. (thick|thin)
 
 # AZ configuration for Ops Director
 az_1_name: PKS-MGMT               # Logical name of availability zone. No spaces or special characters.
-az_1_cluster_name: vlab-mgmt      # Name of cluster in vCenter for PKS
-az_1_rp_name: vlab-pks-mgmt-01                    # Resource pool name in vCenter for PKS
+az_1_cluster_name: COMPUTE01     # Name of cluster in vCenter for PKS
+az_1_rp_name: pks-mgmt                    # Resource pool name in vCenter for PKS
 
-az_2_name: PKS-COMP-1               # Logical name of availability zone. No spaces or special characters.
-az_2_cluster_name: vlab-cna       # Name of cluster in vCenter for PKS
-az_2_rp_name: vlab-pks-comp-01         # Resource pool name in vCenter for PKS
+az_2_name: PKS-COMP-01               # Logical name of availability zone. No spaces or special characters.
+az_2_cluster_name: COMPUTE01      # Name of cluster in vCenter for PKS
+az_2_rp_name: pks-comp-01         # Resource pool name in vCenter for PKS
 
 az_3_name: PKS-COMP-2                        # Logical name of availability zone. No spaces or special characters.
-az_3_cluster_name: vlab-mgmt               # Name of cluster in vCenter for PKS
-az_3_rp_name: vlab-pks-comp-02                    # Resource pool name in vCenter for PKS
+az_3_cluster_name: COMPUTE01               # Name of cluster in vCenter for PKS
+az_3_rp_name: pks-comp-02                    # Resource pool name in vCenter for PKS
 
 ntp_servers: us.pool.ntp.org      # Comma-separated list of NTP servers to use for VMs deployed by BOSH
 enable_vm_resurrector: true       # Whether to enable BOSH VM resurrector
@@ -67,26 +67,26 @@ max_threads: 30                   # Max threads count for deploying VMs
 icmp_checks_enabled: true         # Enable or disable ICMP checks
 
 infra_network_name: "PKS-MGMT"
-infra_vsphere_network: "ls-pks-mgmt"       # vCenter Infrastructure network name
+infra_vsphere_network: "pks-mgmt"       # vCenter Infrastructure network name
 infra_nw_cidr: 172.31.0.0/24               # Infrastructure network CIDR, ex: 10.0.0.0/22
 infra_excluded_range: 172.31.0.2           # Infrastructure network exclusion range
-infra_nw_dns: 192.168.64.60                # Infrastructure network DNS
+infra_nw_dns: 10.0.1.250                # Infrastructure network DNS
 infra_nw_gateway: 172.31.0.1               # Infrastructure network Gateway
 infra_nw_azs: PKS-MGMT                     # Comma separated list of AZ's to be associated with this network
 
 nsx_networking_enabled: true              # (true|false) to use nsx networking feature. PKS v1.1+ requires it to be true
 nsx_mode: nsx-t                           # Valid values: nsx-t, nsx-v
-nsx_address: vlab-nsxmgr.vballin.com      # address of Nsx Mgr FQDN, not IP
+nsx_address: nsx01.flhrnet.local      # address of Nsx Mgr FQDN, not IP
 nsx_username: admin                       # username for nsx access
 nsx_password: "VMware1!"                  # password for nsx access
 
 # Additional network for PKS Controller & Harbor
 pks_network_name: "PKS-COMP"             # Logical switch for PKS-Services
-pks_vsphere_network: "ls-data-services"    # vCenter PKS-Services  network name for PKS - if empty quotes, then this network would be skipped
-pks_nw_cidr: 172.31.2.0/23               # PKS-Services network CIDR, ex: 10.0.0.0/22
-pks_excluded_range: 172.31.2.1           # PKS-Services network exclusion range
-pks_nw_dns: 192.168.64.60                # PKS-Services network DNS
-pks_nw_gateway: 172.31.2.1               # PKS-Services network Gateway
+pks_vsphere_network: "pks-svcs"           # vCenter PKS-Services  network name for PKS - if empty quotes, then this network would be skipped
+pks_nw_cidr: 172.32.0.0/24               # PKS-Services network CIDR, ex: 10.0.0.0/22
+pks_excluded_range: 172.32.0.1           # PKS-Services network exclusion range
+pks_nw_dns: 10.0.1.250                    # PKS-Services network DNS
+pks_nw_gateway: 172.32.0.1               # PKS-Services network Gateway
 pks_nw_azs: PKS-COMP-1,PKS-COMP-2                     # Comma separated list of AZ's to be associated with this network
 is_service_network: true                 # Required select service network option in Ops man true or false
 
@@ -94,18 +94,18 @@ is_service_network: true                 # Required select service network optio
 ######################
 
 # Create DNS entry in the loadbalancer and DNAT/SNAT entries for following
-pks_tile_system_domain: vballin.com
+pks_tile_system_domain: flhrnet.local
 # Just provide the prefix like uaa or api for domain_prefix.
 # The prefix together with system domain would be used like api.pks.test.corp.com or uaa.pks.test.corp.com
 pks_tile_uaa_domain_prefix: pks # Would be used for UAA as ${prefix}.${pks_system_domain}
 
 # IMPORTANT DNS RESOLUTION FOR PKS CONTROLLER
 # External IP that would be routable via the NSX T0 Router and mapped to ${pks_tile_uaa_domain_prefix}.${pks_system_domain}
-pks_tile_uaa_system_domain_ip: 192.168.76.4
+pks_tile_uaa_system_domain_ip: 10.10.0.4
 
-pks_tile_cli_username: nathan
-pks_tile_cli_password: "vmware"
-pks_tile_cli_useremail: nathan79@gmail.com
+pks_tile_cli_username: scottie
+pks_tile_cli_password: "vmware1!"
+pks_tile_cli_useremail: scottieray@me.com
 pks_tile_cert_pem: # Would be generated or provide
 #cert_pem: |
   # -----BEGIN CERTIFICATE-----
@@ -116,12 +116,12 @@ pks_tile_cert_pem: # Would be generated or provide
 
 pks_tile_private_key_pem: # Would be generated
 
-pks_tile_vcenter_host: vlab-vcsa.vballin.com
+pks_tile_vcenter_host: vc01.flhrnet.local
 pks_tile_vcenter_usr: administrator@vsphere.local
-pks_tile_vcenter_pwd: "VMware1!"
-pks_tile_vcenter_data_center: vlab-dc
-pks_tile_vcenter_cluster: vlab-mgmt
-pks_tile_vcenter_datastore: vlab-nfs-ds-ssd
+pks_tile_vcenter_pwd: "VMware1!!"
+pks_tile_vcenter_data_center: FLHRNET
+pks_tile_vcenter_cluster: COMPUTE01
+pks_tile_vcenter_datastore: FLHRNET_NFS01
 pks_tile_vm_folder: pks_vms
 
 pks_tile_singleton_job_az: PKS-MGMT # Check
@@ -139,10 +139,10 @@ pks_tile_disable_nsx_t_precheck_errand: false
 pks_tile_t0_router_name: t0-pks                                 # EDIT - Name of T0 Router to be used for PKS
 pks_tile_nsx_nat_mode: true                                     # Set to true
 pks_tile_external_ip_pool_name: ip-pool1-vips                    # EDIT - Name of External Floating IP Pool in NSX Mgr to be used for PKS
-pks_tile_container_ip_block_name: ip-block-pks-pod-snat     # EDIT - Name of Container IP Block in NSX Mgr to be used for PKS
-pks_tile_nodes_ip_block_name: ip-block-pks-node-snat        # EDIT - Name of Node IP Block in NSX Mgr to be used for PKS nodes in v1.1
-pks_tile_vcenter_cluster_list: vlab-cna                         # EDIT - List of vcenter clusters for PKS to deploy k8s clusters
-pks_tile_nodes_dns_list: 192.168.64.60                          # EDIT - DNS server ip list for use by k8s nodes
+pks_tile_container_ip_block_name: PKS_PODS_BLOCK     # EDIT - Name of Container IP Block in NSX Mgr to be used for PKS
+pks_tile_nodes_ip_block_name: PKS_NODES_BLOCK        # EDIT - Name of Node IP Block in NSX Mgr to be used for PKS nodes in v1.1
+pks_tile_vcenter_cluster_list: COMPUTE01                         # EDIT - List of vcenter clusters for PKS to deploy k8s clusters
+pks_tile_nodes_dns_list: 10.0.1.250                          # EDIT - DNS server ip list for use by k8s nodes
 
 # Syslog Flags
 pks_tile_syslog_migration_enabled: disabled # can be set to 'enabled', if 'disabled' all syslog properties ignored
@@ -312,14 +312,14 @@ harbor_networks: |
   singleton_availability_zone:
     name: PKS-MGMT
 
-harbor_tile_app_domain: vballin.com                      # EDIT ME - Make sure this matches the property specified in the block below
-harbor_tile_app_domain_ip: 192.168.76.5
+harbor_tile_app_domain: flhrnet.local                      # EDIT ME - Make sure this matches the property specified in the block below
+harbor_tile_app_domain_ip: 10.10.0.5
 
 harbor_properties: |
   ######## General
   ### The FQDN (not IP) of Harbor instance. Its domain must match the wildcard domain used for generating Harbor certificate.
   .properties.hostname:
-    value: harbor.vballin.com
+    value: harbor.flhrnet.local
 
   ######## SSL certificate and private key for Harbor
   ### SSL Certificate and key PEMs
@@ -337,7 +337,7 @@ harbor_properties: |
   #   provide the certificate (cert_pem) and private key (private_key_pem) values
   #   in the corresponding parameters further below.
   #
-    generate_cert_domains: ["harbor.vballin.com"]
+    generate_cert_domains: ["harbor.flhrnet.local"]
     value:
       cert_pem:
       private_key_pem:
