@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # EDIT name and domain
-CONCOURSE_ENDPOINT=fly.vballin.com:8080
+CONCOURSE_ENDPOINT=fly.flhrnet.local:8080
 CONCOURSE_TARGET=nsx-concourse
 PIPELINE_NAME=install-pks-with-nsx
 UPGRADE_PKS=upgrade-pks
 UPGRADE_OPSMAN=upgrade-opsman
 UPGRADE_HARBOR=upgrade-harbor
-CONCOURSE_USER=nsx
+CONCOURSE_USER=admin
 CONCOURSE_PW=vmware
 
 alias fly-s="fly -t $CONCOURSE_TARGET set-pipeline -p $PIPELINE_NAME -c ../nsx-t-ci-pipeline/pipelines/install-pks-pipeline.yml -l pks-params.yml"
