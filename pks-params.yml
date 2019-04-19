@@ -101,7 +101,7 @@ pks_tile_uaa_domain_prefix: pks # Would be used for UAA as ${prefix}.${pks_syste
 
 # IMPORTANT DNS RESOLUTION FOR PKS CONTROLLER
 # External IP that would be routable via the NSX T0 Router and mapped to ${pks_tile_uaa_domain_prefix}.${pks_system_domain}
-pks_tile_uaa_system_domain_ip: 10.10.0.4
+pks_tile_uaa_system_domain_ip: pks.flhrnet.local
 
 pks_tile_cli_username: scottie
 pks_tile_cli_password: "VMware1!"
