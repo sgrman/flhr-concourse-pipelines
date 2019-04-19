@@ -181,12 +181,15 @@ pks_tile_ldap_url:
 pks_tile_ldap_user:
 pks_tile_ldap_password:
 pks_tile_ldap_search_base:
+pks_tile_ldap_search_filter:
 pks_tile_ldap_group_search_base:
+pks_tile_ldap_group_search_filter:
 pks_tile_ldap_server_ssl_cert:
 pks_tile_ldap_server_ssl_cert_alias:
 pks_tile_ldap_email_domains:
 pks_tile_ldap_first_name_attribute:
 pks_tile_ldap_last_name_attribute:
+pks_tile_ldap_use_oidc:
 
 # PKS Wavefront integration
 pks_tile_wavefront_api_url: "https://try.wavefront.com/api/" # wavefront api url, empty is disabled
