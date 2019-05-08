@@ -224,7 +224,10 @@ pks_tile_plan_details:
     # If checked, the admission controller will be disabled.
     # Clusters in this plan can then create security vulnerabilities and may impact other tiles.
     # Use with caution.
-    disable_deny_escalating_exec: false # default false
+    admission_plugins:
+      #- pod_security_policy 
+      #- deny_escalating_exec
+      #- security_context_deny
 - plan_detail:
     name: "Stage"  # the name that appears for end users to choose
     is_active: true
@@ -253,7 +256,10 @@ pks_tile_plan_details:
     # If checked, the admission controller will be disabled.
     # Clusters in this plan can then create security vulnerabilities and may impact other tiles.
     # Use with caution.
-    disable_deny_escalating_exec: false # default false
+    admission_plugins:
+      #- pod_security_policy 
+      #- deny_escalating_exec
+      #- security_context_deny
 - plan_detail:
     name: "Prod"  # the name that appears for end users to choose
     is_active: true
@@ -282,7 +288,10 @@ pks_tile_plan_details:
     # If checked, the admission controller will be disabled.
     # Clusters in this plan can then create security vulnerabilities and may impact other tiles.
     # Use with caution.
-    disable_deny_escalating_exec: false # default false
+    admission_plugins:
+      #- pod_security_policy 
+      #- deny_escalating_exec
+      #- security_context_deny
 
 # Use this for downloading PKS from a s3 bucket
 # s3_bucket: pks-tile-s3              # Required for S3. ID of the AWS S3 bucket to download Pivotal releases from
