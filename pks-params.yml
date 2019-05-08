@@ -1,12 +1,12 @@
 # Pipeline resource configuration
 pivnet_token: -pypBa_fz8HtLvLA_ftf    # Pivnet token for downloading resources from Pivnet. Find this token at https://network.pivotal.io/users/dashboard/edit-profile
 opsman_major_minor_version: ^2\.5.*$    # PCF Ops Manager minor version to track
-pks_major_minor_version: ^1\.3.*$     # Use this once PKS v1.1 becomes GA
+pks_major_minor_version: ^1\.4.*$     # Use this once PKS v1.1 becomes GA
 
 # vCenter configuration
 vcenter_host: vc01.flhrnet.local       # vCenter host or IP
 vcenter_usr: administrator@vsphere.local  # vCenter username. If user is tied to a domain, then escape the \, example `domain\\user`
-vcenter_pwd: "VMware1!!"                   # vCenter password
+vcenter_pwd: "VMware1!"                   # vCenter password
 vcenter_data_center: FLHRNET       # vCenter datacenter
 vcenter_insecure: 1                # vCenter skip TLS cert validation; enter `1` to disable cert verification, `0` to enable verification
 vcenter_ca_cert:                   # vCenter CA cert at the API endpoint; enter a value if `vcenter_insecure: 0`
@@ -19,13 +19,13 @@ opsman_admin_username: admin                    # Username for Ops Manager admin
 opsman_admin_password: "VMware1!"               # Password for Ops Manager admin account
 om_ssh_pwd: "VMware1!"                          # SSH password for Ops Manager (ssh user is ubuntu)
 om_decryption_pwd: "VMware1!"                   # Decryption password for Ops Manager exported settings
-om_ntp_servers: us.pool.ntp.org                 # Comma-separated list of NTP Servers
+om_ntp_servers: 0.pool.ntp.org                 # Comma-separated list of NTP Servers
 om_dns_servers: 10.0.1.250                  # Comma-separated list of DNS Servers
 om_gateway: 172.31.0.1                          # Gateway for Ops Manager network
 om_netmask: 255.255.255.0                       # Netmask for Ops Manager network
 om_ip: 172.31.0.2                               # IP to assign to Ops Manager VM
 om_vm_network: pks-mgmt                     # vCenter network name to use to deploy Ops Manager in
-om_vm_name: opsman                         # Name to use for Ops Manager VM
+om_vm_name: opsman.flhrnet.local                         # Name to use for Ops Manager VM
 opsman_disk_type: "thin"                        # Disk type for Ops Manager VM (thick|thin)
 om_vm_power_state: true                         # Whether to power on Ops Manager VM after creation
 #om_vm_folder:                                   # Leave it blank
@@ -48,18 +48,18 @@ vm_disk_type: "thin"          # Disk type for BOSH provisioned VM. (thick|thin)
 
 # AZ configuration for Ops Director
 az_1_name: mgmt               # Logical name of availability zone. No spaces or special characters.
-az_1_cluster_name: COMPUTE01           # Name of cluster in vCenter for PKS
+az_1_cluster_name: COMPUTE           # Name of cluster in vCenter for PKS
 az_1_rp_name: pks-mgmt                    # Resource pool name in vCenter for PKS
 
 az_2_name: comp01               # Logical name of availability zone. No spaces or special characters.
-az_2_cluster_name: COMPUTE01      # Name of cluster in vCenter for PKS
+az_2_cluster_name: COMPUTE      # Name of cluster in vCenter for PKS
 az_2_rp_name: pks-comp-01         # Resource pool name in vCenter for PKS
 
 az_3_name: comp02                        # Logical name of availability zone. No spaces or special characters.
-az_3_cluster_name: COMPUTE01               # Name of cluster in vCenter for PKS
+az_3_cluster_name: COMPUTE               # Name of cluster in vCenter for PKS
 az_3_rp_name: pks-comp-02                    # Resource pool name in vCenter for PKS
 
-ntp_servers: us.pool.ntp.org      # Comma-separated list of NTP servers to use for VMs deployed by BOSH
+ntp_servers: 0.pool.ntp.org      # Comma-separated list of NTP servers to use for VMs deployed by BOSH
 enable_vm_resurrector: true       # Whether to enable BOSH VM resurrector
 max_threads: 30                   # Max threads count for deploying VMs
 
@@ -78,7 +78,7 @@ nsx_networking_enabled: true              # (true|false) to use nsx networking f
 nsx_mode: nsx-t                           # Valid values: nsx-t, nsx-v
 nsx_address: nsx01.flhrnet.local          # address of Nsx Mgr FQDN, not IP
 nsx_username: admin                       # username for nsx access
-nsx_password: "VMware1!"                  # password for nsx access
+nsx_password: "VMware1!VMware1!"                  # password for nsx access
 
 # Additional network for PKS Controller & Harbor
 pks_network_name: "pks-svcs"             # Logical switch for PKS-Services
@@ -118,9 +118,9 @@ pks_tile_private_key_pem: # Would be generated
 
 pks_tile_vcenter_host: vc01.flhrnet.local
 pks_tile_vcenter_usr: administrator@vsphere.local
-pks_tile_vcenter_pwd: "VMware1!!"
+pks_tile_vcenter_pwd: "VMware1!"
 pks_tile_vcenter_data_center: FLHRNET
-pks_tile_vcenter_cluster: COMPUTE01
+pks_tile_vcenter_cluster: COMPUTE
 pks_tile_vcenter_datastore: FLHRNET_NFS01
 pks_tile_vm_folder: pks_vms
 
@@ -138,10 +138,10 @@ pks_tile_disable_nsx_t_precheck_errand: false
 
 pks_tile_t0_router_name: pks-t0                                 # EDIT - Name of T0 Router to be used for PKS
 pks_tile_nsx_nat_mode: true                                     # Set to true
-pks_tile_external_ip_pool_name: PKS_VIP_IP_POOL                    # EDIT - Name of External Floating IP Pool in NSX Mgr to be used for PKS
-pks_tile_container_ip_block_name: PKS_PODS_BLOCK     # EDIT - Name of Container IP Block in NSX Mgr to be used for PKS
-pks_tile_nodes_ip_block_name: PKS_NODES_BLOCK        # EDIT - Name of Node IP Block in NSX Mgr to be used for PKS nodes in v1.1
-pks_tile_vcenter_cluster_list: COMPUTE01                         # EDIT - List of vcenter clusters for PKS to deploy k8s clusters
+pks_tile_external_ip_pool_name: Floating_IP_Pool                    # EDIT - Name of External Floating IP Pool in NSX Mgr to be used for PKS
+pks_tile_container_ip_block_name: IP_PODS_BLOCK     # EDIT - Name of Container IP Block in NSX Mgr to be used for PKS
+pks_tile_nodes_ip_block_name: IP_NODES_BLOCK        # EDIT - Name of Node IP Block in NSX Mgr to be used for PKS nodes in v1.1
+pks_tile_vcenter_cluster_list: COMPUTE                         # EDIT - List of vcenter clusters for PKS to deploy k8s clusters
 pks_tile_nodes_dns_list: 10.0.1.250                          # EDIT - DNS server ip list for use by k8s nodes
 
 # Syslog Flags
@@ -157,9 +157,9 @@ pks_tile_syslog_ca_cert:
 pks_tile_allow_public_ip: true # leave it to empty or false to turn off public ip
 
 # vRealize Log Insight (vrli) flags
-pks_tile_vrli_enabled: false # Change to true and fill following fields for using vrli
-pks_tile_vrli_host:
-pks_tile_vrli_use_ssl: true
+pks_tile_vrli_enabled: true # Change to true and fill following fields for using vrli
+pks_tile_vrli_host: log01.flhrnet.local
+pks_tile_vrli_use_ssl: false
 pks_tile_vrli_skip_cert_verify: true
 pks_tile_vrli_ca_cert: # cert contents
 pks_tile_vrli_rate_limit: 0
@@ -200,10 +200,10 @@ pks_tile_telemetry: enabled # can be enabled or disabled
 
 pks_tile_plan_details:
 - plan_detail:
-    name: "DevTest"  # the name that appears for end users to choose
+    name: "Dev"  # the name that appears for end users to choose
     plan_selector: plan1_selector # Dont change the value of selector - Needs to be planN_selector
     is_active: true
-    description: "DevTest Environment"
+    description: "Dev Environment"
     # AZ can be only a single value for PKS v1.0
     # There can be a comma separated list for PKS v1.1 which supports multiple AZs
     az_placement: comp01  # Specify the AZ in which the cluster will be created, single for PKS v1.0
@@ -226,7 +226,7 @@ pks_tile_plan_details:
     # Use with caution.
     disable_deny_escalating_exec: false # default false
 - plan_detail:
-    name: "Staging"  # the name that appears for end users to choose
+    name: "Stage"  # the name that appears for end users to choose
     is_active: true
     plan_selector: plan2_selector # Dont change the value of selector - Needs to be planN_selector
     description: "Staging"
@@ -255,7 +255,7 @@ pks_tile_plan_details:
     # Use with caution.
     disable_deny_escalating_exec: false # default false
 - plan_detail:
-    name: "Production"  # the name that appears for end users to choose
+    name: "Prod"  # the name that appears for end users to choose
     is_active: true
     plan_selector: plan3_selector # Dont change the value of selector - Needs to be planN_selector
     description: "Production"
