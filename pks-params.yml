@@ -66,7 +66,7 @@ max_threads: 30                   # Max threads count for deploying VMs
 # Network configuration for Ops Director
 icmp_checks_enabled: true         # Enable or disable ICMP checks
 
-infra_network_name: "PKS-MGMT"
+infra_network_name: "pks-mgmt"
 infra_vsphere_network: "pks-mgmt"          # vCenter Infrastructure network name
 infra_nw_cidr: 172.31.0.0/24               # Infrastructure network CIDR, ex: 10.0.0.0/22
 infra_excluded_range: 172.31.0.2           # Infrastructure network exclusion range
