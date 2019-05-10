@@ -207,8 +207,8 @@ pks_tile_plan_details:
     # AZ can be only a single value for PKS v1.0
     # There can be a comma separated list for PKS v1.1 which supports multiple AZs
     az_placement: comp01  # Specify the AZ in which the cluster will be created, single for PKS v1.0
-    master_vm_type: medium
-    worker_vm_type: medium
+    master_vm_type: medium-disk
+    worker_vm_type: medium-disk
     persistent_disk_type: "10240" # Used in PKS 1.0
     master_persistent_disk_type: "10240" # Used in PKS 1.1+
     worker_persistent_disk_type: "102400" # Used in PKS 1.1+
@@ -236,7 +236,7 @@ pks_tile_plan_details:
     # AZ can be only a single value for PKS v1.0
     # There can be a comma separated list for PKS v1.1 which supports multiple AZs
     az_placement: comp01  # Specify the AZ in which the cluster will be created, single for PKS v1.0
-    master_vm_type: medium
+    master_vm_type: medium-disk
     worker_vm_type: large
     persistent_disk_type: "10240" # Used in PKS 1.0
     master_persistent_disk_type: "10240" # Used in PKS 1.1+
@@ -268,7 +268,7 @@ pks_tile_plan_details:
     # AZ can be only a single value for PKS v1.0
     # There can be a comma separated list for PKS v1.1 which supports multiple AZs
     az_placement: comp01  # Specify the AZ in which the cluster will be created, single for PKS v1.0
-    master_vm_type: medium
+    master_vm_type: medium-disk
     worker_vm_type: large
     persistent_disk_type: "10240" # Used in PKS 1.0
     master_persistent_disk_type: "10240" # Used in PKS 1.1+
