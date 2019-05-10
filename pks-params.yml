@@ -319,8 +319,7 @@ harbor_networks: |
   network:
     name: pks-mgmt
   other_availability_zones:
-  - name: comp01
-  - name: comp02
+  - name: mgmt
   singleton_availability_zone:
     name: mgmt
 
