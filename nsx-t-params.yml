@@ -4,30 +4,30 @@ enable_ansible_debug: false # set value to true for verbose output from ansible
 nsx_image_webserver: "http://192.168.110.11:40001"
 
 # NSX general network settings
-mgmt_portgroup: 'ESXi-RegionA01-vDS-COMP'
-dns_server: 192.168.110.10
-dns_domain: corp.local.io
+mgmt_portgroup: ''
+dns_server: 
+dns_domain: flhrnet.local
 ntp_servers: time.vmware.com
-default_gateway: 192.168.110.1
+default_gateway: 
 netmask: 255.255.255.0
 
 # NSX manager cluster configs
 nsx_manager_ips: 192.168.110.33,192.168.110.34,192.168.110.35 # 3 node cluster is recommended. 1 is minimum, 3 is max
 nsx_manager_virtual_ip: 0.0.0.0
 nsx_manager_username: admin
-nsx_manager_password: Admin!23Admin
-nsx_manager_hostname_prefix: "nsxt-mgr" # Generated hostname: nsxt-mgr-1.corp.local.io, will be FQDN
-nsx_manager_root_pwd: Admin!23Admin # Min 12 chars, upper, lower, number, special digit
-nsx_manager_cli_pwd: Admin!23Admin
+nsx_manager_password: Admin1!Admin1!
+nsx_manager_hostname_prefix: "nsx01" # Generated hostname: nsxt-mgr-1.corp.local.io, will be FQDN
+nsx_manager_root_pwd: Admin1!Admin1! # Min 12 chars, upper, lower, number, special digit
+nsx_manager_cli_pwd: Admin1!Admin1!
 nsx_manager_deployment_size: small # Recommended for real bare-bones demo, smallest setup
-nsx_manager_deployment_ip_prefix_length: 23
+nsx_manager_deployment_ip_prefix_length: 24
 nsx_manager_ssh_enabled: true
-vcenter_ip: 192.168.110.22
+vcenter_ip: 
 vcenter_username: administrator@corp.local
 vcenter_password: "VMware1!"
-vcenter_datacenter: RegionA01
-vcenter_cluster: RegionA01-MGMT # management cluster
-vcenter_datastore: iscsi
+vcenter_datacenter: 
+vcenter_cluster:  # management cluster
+vcenter_datastore: 
 resource_reservation_off: true
 
 # Compute manager credentials should be the same as above vCenter's if
