@@ -184,3 +184,6 @@ nsx_t_csr_request_spec: |
     key_size: 2048               # Valid values: 2048 or 3072
     algorithm: RSA               # Valid values: RSA or DSA
 
+nsx_t_lbr_spec: |
+  loadbalancers:
+
