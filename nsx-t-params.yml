@@ -1,6 +1,6 @@
 enable_ansible_debug: false # set value to true for verbose output from ansible
 
-nsxt_ansible_branch: v1.0.0
+nsxt_ansible_branch: master
 nsx_t_pipeline_branch: nsxt_2.4.0
 
 # format: "http://172.18.0.2"
