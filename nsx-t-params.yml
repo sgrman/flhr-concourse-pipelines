@@ -17,6 +17,7 @@ default_gateway: 10.0.1.1
 netmask: 255.255.255.0
 
 # NSX manager cluster configs
+unified_appliance:
 nsx_manager_ips: 10.0.1.31 # 3 node cluster is recommended. 1 is minimum, 3 is max
 nsx_manager_virtual_ip: 10.0.1.30
 nsx_manager_username: admin
@@ -187,3 +188,4 @@ nsx_t_csr_request_spec: |
 nsx_t_lbr_spec: |
   loadbalancers:
 
+nsx_t_ha_switching_profile_spec:
