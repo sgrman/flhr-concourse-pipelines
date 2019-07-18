@@ -6,7 +6,7 @@ nsx_t_pipeline_branch: master
 # format: "http://172.18.0.2"
 nsx_image_webserver: "http://nginx"
 ova_file_name: "nsx-unified-appliance-2.4.1.0.0.13716579.ova " #Uncomment this if downloaded file manually and placed under /home/concourse
-ovftool_file_name: "VMware-ovftool-4.3.0-7948156-lin.x86_64.bundle"   #Uncomment this if downloaded file manually and placed under /home/concourse
+ovftool_file_name: "VMware-ovftool-4.3.0-12320924-lin.x86_64.bundle"   #Uncomment this if downloaded file manually and placed under /home/concourse
 
 # NSX general network settings
 mgmt_portgroup: 'DVS_MGMT_ESXi_VMs'
