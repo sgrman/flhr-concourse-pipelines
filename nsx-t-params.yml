@@ -2,6 +2,7 @@ enable_ansible_debug: false # set value to true for verbose output from ansible
 
 nsxt_ansible_branch: master
 nsx_t_pipeline_branch: master
+unified_appliance: true #set to true or false
 
 # format: "http://172.18.0.2"
 nsx_image_webserver: "http://nginx"
@@ -17,7 +18,6 @@ default_gateway: 10.0.1.1
 netmask: 255.255.255.0
 
 # NSX manager cluster configs
-unified_appliance:
 nsx_manager_ips: 10.0.1.31 # 3 node cluster is recommended. 1 is minimum, 3 is max
 nsx_manager_virtual_ip: 10.0.1.30
 nsx_manager_username: admin
