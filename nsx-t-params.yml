@@ -21,10 +21,10 @@ netmask: 255.255.255.0
 nsx_manager_ips: 10.0.1.31 # 3 node cluster is recommended. 1 is minimum, 3 is max
 nsx_manager_virtual_ip: 10.0.1.30
 nsx_manager_username: admin
-nsx_manager_password: Admin1!Admin1!
-nsx_manager_hostname_prefix: "nsx01" # Generated hostname: nsxt-mgr-1.corp.local.io, will be FQDN
-nsx_manager_root_pwd: Admin1!Admin1! # Min 12 chars, upper, lower, number, special digit
-nsx_manager_cli_pwd: Admin1!Admin1!
+nsx_manager_password: "VMware1!VMware1!"
+nsx_manager_hostname_prefix: "nsx" # Generated hostname: nsxt-mgr-1.corp.local.io, will be FQDN
+nsx_manager_root_pwd: VMware1!VMware1! # Min 12 chars, upper, lower, number, special digit
+nsx_manager_cli_pwd: VMware1!VMware1!
 nsx_manager_deployment_size: small # Recommended for real bare-bones demo, smallest setup
 nsx_manager_deployment_ip_prefix_length: 24
 nsx_manager_ssh_enabled: true
@@ -46,7 +46,7 @@ compute_manager_2_username: "null"
 compute_manager_2_password: "null"
 
 edge_uplink_profile_vlan: 0 # For outbound uplink connection used by Edge, usually keep as 0
-esxi_uplink_profile_vlan: 0 # For internal overlay connection used by Esxi hosts, usually trasnport VLAN ID
+esxi_uplink_profile_vlan: 200 # For internal overlay connection used by Esxi hosts, usually trasnport VLAN ID
 
 # Virtual Tunnel Endpoint network ip pool
 vtep_ip_pool_cidr: 192.168.200.0/24
@@ -66,8 +66,8 @@ tier0_ha_vip: 10.0.1.254
 edge_ips: 10.0.1.8,10.0.1.9    #comma separated based in number of required edges
 edge_default_gateway: 10.0.1.1
 edge_ip_prefix_length: 24
-edge_hostname_prefix: edge-
-edge_transport_node_prefix: edge-tn-
+edge_hostname_prefix: edge
+edge_transport_node_prefix: edge-tn
 edge_cli_password: "VMware1!VMware1!"
 edge_root_password: "VMware1!VMware1!"
 edge_deployment_size: "large" #Large recommended for PKS deployments
@@ -141,7 +141,7 @@ nsx_t_nat_rules_spec: |
   # Sample entry for allowing outbound from PKS-svcs network
   - t0_router: pks-t0-router
     nat_type: snat
-    source_network: 17.32.0.0/24      # PKS Clusters network cidr
+    source_network: 172.32.0.0/24      # PKS Clusters network cidr
     translated_network: 10.10.0.11      # SNAT External Address for PKS networks
     rule_priority: 1056                  # Lower priority
 
