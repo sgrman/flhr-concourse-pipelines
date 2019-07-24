@@ -10,7 +10,7 @@ ova_file_name: "nsx-unified-appliance-2.4.1.0.0.13716579.ova" #Uncomment this if
 ovftool_file_name: "VMware-ovftool-4.3.0-12320924-lin.x86_64.bundle"   #Uncomment this if downloaded file manually and placed under /home/concourse
 
 # NSX general network settings
-mgmt_portgroup: 'DVS_MGMT_ESXi_VMs'
+mgmt_portgroup: "DVS_MGMT_ESXi_VMs"
 dns_server: 10.0.1.250
 dns_domain: flhrnet.local
 ntp_servers: time.vmware.com
@@ -74,9 +74,9 @@ edge_deployment_size: "large" #Large recommended for PKS deployments
 vc_datacenter_for_edge: FLHRNET
 vc_cluster_for_edge: MGMT-EDGE
 vc_datastore_for_edge: FLHRNET_NFS01
-vc_uplink_network_for_edge: "DVS_MGMT_Uplink"
-vc_overlay_network_for_edge: "DVS_MGMT_TEP"
 vc_management_network_for_edge: "DVS_MGMT_ESXi_VMs"
+vc_overlay_network_for_edge: "DVS_MGMT_TEP"
+vc_uplink_network_for_edge: "DVS_MGMT_Uplink"
 
 ## ESX hosts
 #Intsll vSphere clusters automatically
@@ -123,10 +123,10 @@ nsx_t_external_ip_pool_spec: |
     start: 10.10.0.12 # Should not include gateway
     end: 10.10.0.200  # Should not include gateway
 
-  - name: tep-ip-pool2
-    cidr: 192.168.220.0/24
-    start: 192.168.220.10
-    end: 192.168.220.200
+  - name: 
+    cidr: 
+    start: 
+    end: 
 
 
 nsx_t_nat_rules_spec: |
