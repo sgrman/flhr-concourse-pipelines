@@ -76,9 +76,9 @@ infra_nw_azs: mgmt,comp01,comp02                     # Comma separated list of A
 
 nsx_networking_enabled: true              # (true|false) to use nsx networking feature. PKS v1.1+ requires it to be true
 nsx_mode: nsx-t                           # Valid values: nsx-t, nsx-v
-nsx_address: nsx01.flhrnet.local          # address of Nsx Mgr FQDN, not IP
+nsx_address: nsx01.flhrnet.local          # address of NSX VIP address for management cluster
 nsx_username: admin                       # username for nsx access
-nsx_password: "VMware1!VMware1!"                  # password for nsx access
+nsx_password: "VMware1!VMware1!"          # password for nsx access
 
 # Additional network for PKS Controller & Harbor
 pks_network_name: "pks-svcs"             # Logical switch for PKS-Services
@@ -139,8 +139,8 @@ pks_tile_disable_nsx_t_precheck_errand: false
 pks_tile_t0_router_name: pks-t0                                 # EDIT - Name of T0 Router to be used for PKS
 pks_tile_nsx_nat_mode: true                                     # Set to true
 pks_tile_external_ip_pool_name: Floating_IP_Pool                    # EDIT - Name of External Floating IP Pool in NSX Mgr to be used for PKS
-pks_tile_container_ip_block_name: IP-PODS-BLOCK     # EDIT - Name of Container IP Block in NSX Mgr to be used for PKS
-pks_tile_nodes_ip_block_name: IP-NODES-BLOCK        # EDIT - Name of Node IP Block in NSX Mgr to be used for PKS nodes in v1.1
+pks_tile_container_ip_block_name: pks-pods-ip-block     # EDIT - Name of Container IP Block in NSX Mgr to be used for PKS
+pks_tile_nodes_ip_block_name: pks-node-ip-block        # EDIT - Name of Node IP Block in NSX Mgr to be used for PKS nodes in v1.1
 pks_tile_vcenter_cluster_list: COMPUTE                         # EDIT - List of vcenter clusters for PKS to deploy k8s clusters
 pks_tile_nodes_dns_list: 10.0.1.250                          # EDIT - DNS server ip list for use by k8s nodes
 
@@ -192,9 +192,9 @@ pks_tile_ldap_last_name_attribute:
 pks_tile_ldap_use_oidc:
 
 # PKS Wavefront integration
-pks_tile_wavefront_api_url: "https://try.wavefront.com/api/" # wavefront api url, empty is disabled
+pks_tile_wavefront_api_url: "https://vmware.wavefront.com/api" # wavefront api url, empty is disabled
 pks_tile_wavefront_token: 06382415-1a65-48dd-a534-9ecee41ba39f  # wavefront access token
-pks_tile_wavefront_alert_targets:  # email ids to sent alerts
+pks_tile_wavefront_alert_targets: sray@vmware.com # email ids to sent alerts
 
 pks_tile_telemetry: enabled # can be enabled or disabled
 

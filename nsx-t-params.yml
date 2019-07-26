@@ -46,7 +46,7 @@ compute_manager_2_username: "null"
 compute_manager_2_password: "null"
 
 edge_uplink_profile_vlan: 0 # For outbound uplink connection used by Edge, usually keep as 0
-esxi_uplink_profile_vlan: 200 # For internal overlay connection used by Esxi hosts, usually trasnport VLAN ID
+esxi_uplink_profile_vlan: 200 # This will be mapped to the host-overlay profile for the Edge VMs.  This is a transport VLAN for the TEP network.
 
 # Virtual Tunnel Endpoint network ip pool
 vtep_ip_pool_cidr: 192.168.200.0/24
@@ -81,7 +81,7 @@ vc_uplink_network_for_edge: "DVS_MGMT_Uplink"
 ## ESX hosts
 #Intsll vSphere clusters automatically
 clusters_to_install_nsx: COMPUTE    #Comma seprated
-per_cluster_vlans: 0  #Comma seprated, order of VLANs applied same as order of clusters
+per_cluster_vlans: 200  #Comma seprated, order of VLANs for the TEP network overlay transport network.  This will be mapped to a "clustername"-profile.
 
 esx_ips: "" # additional esx hosts, if any, to be individually installed
 esx_os_version: "6.7.0"
