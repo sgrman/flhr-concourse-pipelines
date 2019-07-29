@@ -17,9 +17,10 @@ om_data_store: FLHRNET_NFS01                    # vCenter datastore name to depl
 opsman_domain_or_ip_address: opsman.flhrnet.local  # FQDN to access Ops Manager without protocol (will use https), ex: opsmgr.example.com
 opsman_admin_username: admin                    # Username for Ops Manager admin account
 opsman_admin_password: "VMware1!"               # Password for Ops Manager admin account
-om_ssh_pwd: "VMware1!"                          # SSH password for Ops Manager (ssh user is ubuntu)
+opsman_admin_password: "AAAAB3NzaC1yc2EAAAADAQABAAABAQC6EdzJvAwEwsfVwBQX/NTAFF6Xal1gtlUUhqoF8fnV2Y1ppLnu/ZOyiLw/CyQoJPTg+RCFPMttdj9isrGbh77pCvFsbGFk7zgKB7LsPj+p2XU9BxakGDwbNCne44weWIUZN5ghmQOoUEwkT95QOoQrsJfbOwI2yDFSpcjU943Vkwsq0TJlZybFjemph282oPKIzDpAI/GpqBp1PNGFEuKEH60h6/jXmYA20RX3n2TGe6oPIIX0sFhJKDP7nIDfg/XwDj1nj8xq9I97HaSriKjI2T5y7X+GvXOT9bDsTf3tHAkbktHVDNxJMOSFeCqimU/GivqcYa5ENQO/YYcApi0B scottieray@sray.lan"
+#om_ssh_pwd: "VMware1!"                          # SSH password for Ops Manager (ssh user is ubuntu)
 om_decryption_pwd: "VMware1!"                   # Decryption password for Ops Manager exported settings
-om_ntp_servers: 0.pool.ntp.org                 # Comma-separated list of NTP Servers
+om_ntp_servers: us.pool.ntp.org                 # Comma-separated list of NTP Servers
 om_dns_servers: 10.0.1.250                  # Comma-separated list of DNS Servers
 om_gateway: 172.31.0.1                          # Gateway for Ops Manager network
 om_netmask: 255.255.255.0                       # Netmask for Ops Manager network
@@ -59,7 +60,7 @@ az_3_name: comp02                        # Logical name of availability zone. No
 az_3_cluster_name: COMPUTE               # Name of cluster in vCenter for PKS
 az_3_rp_name: pks-comp-02                    # Resource pool name in vCenter for PKS
 
-ntp_servers: 0.pool.ntp.org      # Comma-separated list of NTP servers to use for VMs deployed by BOSH
+ntp_servers: us.pool.ntp.org      # Comma-separated list of NTP servers to use for VMs deployed by BOSH
 enable_vm_resurrector: true       # Whether to enable BOSH VM resurrector
 max_threads: 30                   # Max threads count for deploying VMs
 
@@ -72,7 +73,7 @@ infra_nw_cidr: 172.31.0.0/24               # Infrastructure network CIDR, ex: 10
 infra_excluded_range: 172.31.0.2           # Infrastructure network exclusion range
 infra_nw_dns: 10.0.1.250                   # Infrastructure network DNS
 infra_nw_gateway: 172.31.0.1               # Infrastructure network Gateway
-infra_nw_azs: mgmt,comp01,comp02                     # Comma separated list of AZ's to be associated with this network
+infra_nw_azs: mgmt,comp01,comp02           # Comma separated list of AZ's to be associated with this network
 
 nsx_networking_enabled: true              # (true|false) to use nsx networking feature. PKS v1.1+ requires it to be true
 nsx_mode: nsx-t                           # Valid values: nsx-t, nsx-v
@@ -101,7 +102,7 @@ pks_tile_uaa_domain_prefix: pks # Would be used for UAA as ${prefix}.${pks_syste
 
 # IMPORTANT DNS RESOLUTION FOR PKS CONTROLLER
 # External IP that would be routable via the NSX T0 Router and mapped to ${pks_tile_uaa_domain_prefix}.${pks_system_domain}
-pks_tile_uaa_system_domain_ip: pks.flhrnet.local
+pks_tile_uaa_system_domain_ip: 10.10.0.4
 
 pks_tile_cli_username: scottie
 pks_tile_cli_password: "VMware1!"
@@ -113,6 +114,10 @@ pks_tile_cert_pem: # Would be generated or provide
   # asfsafsafasf
   # .............
   # -----END CERTIFICATE-----
+
+# Add AD groups to UAA
+pks_tile_admin_ad_group: ""
+pks_tile_manage_ad_group: ""
 
 pks_tile_private_key_pem: # Would be generated
 
@@ -138,7 +143,7 @@ pks_tile_disable_nsx_t_precheck_errand: false
 
 pks_tile_t0_router_name: pks-t0                                 # EDIT - Name of T0 Router to be used for PKS
 pks_tile_nsx_nat_mode: true                                     # Set to true
-pks_tile_external_ip_pool_name: Floating_IP_Pool                    # EDIT - Name of External Floating IP Pool in NSX Mgr to be used for PKS
+pks_tile_external_ip_pool_name: pks-vip-pool                    # EDIT - Name of External Floating IP Pool in NSX Mgr to be used for PKS
 pks_tile_container_ip_block_name: pks-pods-ip-block     # EDIT - Name of Container IP Block in NSX Mgr to be used for PKS
 pks_tile_nodes_ip_block_name: pks-node-ip-block        # EDIT - Name of Node IP Block in NSX Mgr to be used for PKS nodes in v1.1
 pks_tile_vcenter_cluster_list: COMPUTE                         # EDIT - List of vcenter clusters for PKS to deploy k8s clusters
@@ -146,15 +151,18 @@ pks_tile_nodes_dns_list: 10.0.1.250                          # EDIT - DNS server
 
 # Syslog Flags
 pks_tile_syslog_migration_enabled: disabled # can be set to 'enabled', if 'disabled' all syslog properties ignored
-pks_tile_syslog_address: #101.10.10.10
-pks_tile_syslog_port: # 0
-pks_tile_syslog_transport_protocol: #tcp
-pks_tile_syslog_tls_enabled: # true
+pks_tile_syslog_address: 10.0.1.5 #IP address of syslog server
+pks_tile_syslog_port: 514
+pks_tile_syslog_transport_protocol: udp #udp or tcp
+pks_tile_syslog_tls_enabled: fasle 
 pks_tile_syslog_peer: # *.test.corp.com
 pks_tile_syslog_ca_cert:
 
 # Allow public ip
 pks_tile_allow_public_ip: true # leave it to empty or false to turn off public ip
+
+# vRealize vROPS cAdvisor
+pks_enable_cadvisor: true
 
 # vRealize Log Insight (vrli) flags
 pks_tile_vrli_enabled: true # Change to true and fill following fields for using vrli
@@ -162,7 +170,7 @@ pks_tile_vrli_host: log01.flhrnet.local
 pks_tile_vrli_use_ssl: false
 pks_tile_vrli_skip_cert_verify: true
 pks_tile_vrli_ca_cert: # cert contents
-pks_tile_vrli_rate_limit: 0
+pks_tile_vrli_rate_limit: #0
 
 # PKS use Proxy
 pks_tile_enable_http_proxy: false # Change to true and fill following fields for using proxy
@@ -192,7 +200,7 @@ pks_tile_ldap_last_name_attribute:
 pks_tile_ldap_use_oidc:
 
 # PKS Wavefront integration
-pks_tile_wavefront_api_url: "https://vmware.wavefront.com/api" # wavefront api url, empty is disabled
+pks_tile_wavefront_api_url: "https://try.wavefront.com/api" # wavefront api url, empty is disabled
 pks_tile_wavefront_token: 06382415-1a65-48dd-a534-9ecee41ba39f  # wavefront access token
 pks_tile_wavefront_alert_targets: sray@vmware.com # email ids to sent alerts
 
@@ -203,7 +211,7 @@ pks_tile_plan_details:
     name: "Dev"  # the name that appears for end users to choose
     plan_selector: plan1_selector # Dont change the value of selector - Needs to be planN_selector
     is_active: true
-    description: "Dev Environment"
+    description: "Development AZ=comp01 Single Master"
     # AZ can be only a single value for PKS v1.0
     # There can be a comma separated list for PKS v1.1 which supports multiple AZs
     az_placement: comp01  # Specify the AZ in which the cluster will be created, single for PKS v1.0
@@ -213,7 +221,7 @@ pks_tile_plan_details:
     master_persistent_disk_type: "10240" # Used in PKS 1.1+
     worker_persistent_disk_type: "102400" # Used in PKS 1.1+
     master_instances: 1    # The number of K8s worker instances
-    worker_instances: 3    # The number of K8s worker instances
+    worker_instances: 2    # The number of K8s worker instances
     errand_vm_type: micro
     addons_spec: "" # Kubernetes yml that contains specifications of addons to run on every cluster. This is an experimental feature. Please consider carefully before applying this to your plan
     # Privileged containers run with host-like permissions.
@@ -228,11 +236,12 @@ pks_tile_plan_details:
       #- pod_security_policy 
       #- deny_escalating_exec
       #- security_context_deny
+ 
 - plan_detail:
     name: "Stage"  # the name that appears for end users to choose
     is_active: true
     plan_selector: plan2_selector # Dont change the value of selector - Needs to be planN_selector
-    description: "Staging"
+    description: "Staging Cluster AZ=comp01 Single Master"
     # AZ can be only a single value for PKS v1.0
     # There can be a comma separated list for PKS v1.1 which supports multiple AZs
     az_placement: comp01  # Specify the AZ in which the cluster will be created, single for PKS v1.0
@@ -260,21 +269,88 @@ pks_tile_plan_details:
       #- pod_security_policy 
       #- deny_escalating_exec
       #- security_context_deny
+
+- plan_detail:
+    name: "QA"  # the name that appears for end users to choose
+    is_active: true
+    plan_selector: plan4_selector # Dont change the value of selector - Needs to be planN_selector
+    description: "QA Cluster AZ=comp02 Single-Master"
+    # AZ can be only a single value for PKS v1.0
+    # There can be a comma separated list for PKS v1.1 which supports multiple AZs
+    az_placement: comp02  # Specify the AZ in which the cluster will be created, single for PKS v1.0
+    master_vm_type: medium.disk
+    worker_vm_type: large
+    persistent_disk_type: "10240" # Used in PKS 1.0
+    master_persistent_disk_type: "10240" # Used in PKS 1.1+
+    worker_persistent_disk_type: "102400" # Used in PKS 1.1+
+    master_instances: 1    # The number of K8s worker instances
+    worker_instances: 3    # The number of K8s worker instances
+    errand_vm_type: micro
+    addons_spec: # "kind: StorageClass
+    #apiVersion: storage.k8s.io/v1
+    #metadata:
+    #name: thin
+    #annotations:
+    #storageclass.kubernetes.io/is-default-class: "true""
+ # Kubernetes yml that contains specifications of addons to run on every cluster. This is an experimental feature. Please consider carefully before applying this to your plan
+    allow_privileged_containers: true  # Privileged containers run with host-like permissions. Allowing your users to deploy privileged containers in clusters using this plan can create security vulnerabilities and may impact other tiles. Use with caution."
+    # The admission controller will deny exec and attach commands to pods that run with escalated privileges that allow host access.
+    # If checked, the admission controller will be disabled.
+    # Clusters in this plan can then create security vulnerabilities and may impact other tiles.
+    # Use with caution.
+    admission_plugins:
+      #- pod_security_policy 
+      #- deny_escalating_exec
+      #- security_context_deny
+
 - plan_detail:
     name: "Prod"  # the name that appears for end users to choose
     is_active: true
     plan_selector: plan3_selector # Dont change the value of selector - Needs to be planN_selector
-    description: "Production"
+    description: "Production Cluster AZ=comp02  Multi-Master"
     # AZ can be only a single value for PKS v1.0
     # There can be a comma separated list for PKS v1.1 which supports multiple AZs
-    az_placement: comp01  # Specify the AZ in which the cluster will be created, single for PKS v1.0
+    az_placement: comp02  # Specify the AZ in which the cluster will be created, single for PKS v1.0
     master_vm_type: medium-disk
     worker_vm_type: large
     persistent_disk_type: "10240" # Used in PKS 1.0
     master_persistent_disk_type: "10240" # Used in PKS 1.1+
     worker_persistent_disk_type: "102400" # Used in PKS 1.1+
     master_instances: 3    # The number of K8s worker instances
-    worker_instances: 5    # The number of K8s worker instances
+    worker_instances: 3    # The number of K8s worker instances
+    errand_vm_type: micro
+    addons_spec: # "kind: StorageClass
+    #apiVersion: storage.k8s.io/v1
+    #metadata:
+    #name: thin
+    #annotations:
+    #storageclass.kubernetes.io/is-default-class: "true""
+ # Kubernetes yml that contains specifications of addons to run on every cluster. This is an experimental feature. Please consider carefully before applying this to your plan
+    allow_privileged_containers: true  # Privileged containers run with host-like permissions. Allowing your users to deploy privileged containers in clusters using this plan can create security vulnerabilities and may impact other tiles. Use with caution."
+    # The admission controller will deny exec and attach commands to pods that run with escalated privileges that allow host access.
+    # If checked, the admission controller will be disabled.
+    # Clusters in this plan can then create security vulnerabilities and may impact other tiles.
+    # Use with caution.
+    admission_plugins:
+      #- pod_security_policy 
+      #- deny_escalating_exec
+      #- security_context_deny
+
+- plan_detail:
+    name: "Performance"  # the name that appears for end users to choose
+    is_active: true
+    plan_selector: plan5_selector # Dont change the value of selector - Needs to be planN_selector
+    description: "Performance Testing Cluster AZ=comp02 Multi-Master"
+    # AZ can be only a single value for PKS v1.0
+    # There can be a comma separated list for PKS v1.1 which supports multiple AZs
+    az_placement: comp02  # Specify the AZ in which the cluster will be created, single for PKS v1.0
+    master_vm_type: medium.disk
+    worker_vm_type: large
+    persistent_disk_type: "10240" # Used in PKS 1.0
+    master_persistent_disk_type: "10240" # Used in PKS 1.1+
+    worker_persistent_disk_type: "102400" # Used in PKS 1.1+
+    master_instances: 3    # The number of K8s worker instances
+    worker_instances: 3    # The number of K8s worker instances
     errand_vm_type: micro
     addons_spec: # "kind: StorageClass
     #apiVersion: storage.k8s.io/v1
@@ -307,7 +383,7 @@ pks_tile_plan_details:
 ######## PKS tile-specific parameters
 product_name: harbor-container-registry  # do not change
 product_slug: harbor-container-registry  # do not change
-harbor_product_version: ^1\.7.*$  # PKS tile version to install
+harbor_product_version: ^1\.8.*$  # PKS tile version to install
 product_globs: "*.pivotal"
 
 # Note: check companion "pks_vault_params.sh" script for automated credentials
