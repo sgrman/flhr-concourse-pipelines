@@ -199,7 +199,7 @@ pks_tile_ldap_last_name_attribute:
 pks_tile_ldap_use_oidc:
 
 # PKS Wavefront integration
-pks_tile_wavefront_api_url: "https://try.wavefront.com/api" # wavefront api url, empty is disabled
+pks_tile_wavefront_api_url: "https://vmware.wavefront.com/api" # wavefront api url, empty is disabled
 pks_tile_wavefront_token: 06382415-1a65-48dd-a534-9ecee41ba39f  # wavefront access token
 pks_tile_wavefront_alert_targets: sray@vmware.com # email ids to sent alerts
 
