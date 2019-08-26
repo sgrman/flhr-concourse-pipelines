@@ -17,7 +17,7 @@ om_data_store: FLHRNET_NFS01                    # vCenter datastore name to depl
 opsman_domain_or_ip_address: opsman.flhrnet.local  # FQDN to access Ops Manager without protocol (will use https), ex: opsmgr.example.com
 opsman_admin_username: admin                    # Username for Ops Manager admin account
 opsman_admin_password: "VMware1!"               # Password for Ops Manager admin account
-om_ssh_key: "AAAAB3NzaC1yc2EAAAADAQABAAABAQC6EdzJvAwEwsfVwBQX/NTAFF6Xal1gtlUUhqoF8fnV2Y1ppLnu/ZOyiLw/CyQoJPTg+RCFPMttdj9isrGbh77pCvFsbGFk7zgKB7LsPj+p2XU9BxakGDwbNCne44weWIUZN5ghmQOoUEwkT95QOoQrsJfbOwI2yDFSpcjU943Vkwsq0TJlZybFjemph282oPKIzDpAI/GpqBp1PNGFEuKEH60h6/jXmYA20RX3n2TGe6oPIIX0sFhJKDP7nIDfg/XwDj1nj8xq9I97HaSriKjI2T5y7X+GvXOT9bDsTf3tHAkbktHVDNxJMOSFeCqimU/GivqcYa5ENQO/YYcApi0B scottieray@sray.lan" # SSH password for Ops Manager (ssh user is ubuntu)
+om_ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC6EdzJvAwEwsfVwBQX/NTAFF6Xal1gtlUUhqoF8fnV2Y1ppLnu/ZOyiLw/CyQoJPTg+RCFPMttdj9isrGbh77pCvFsbGFk7zgKB7LsPj+p2XU9BxakGDwbNCne44weWIUZN5ghmQOoUEwkT95QOoQrsJfbOwI2yDFSpcjU943Vkwsq0TJlZybFjemph282oPKIzDpAI/GpqBp1PNGFEuKEH60h6/jXmYA20RX3n2TGe6oPIIX0sFhJKDP7nIDfg/XwDj1nj8xq9I97HaSriKjI2T5y7X+GvXOT9bDsTf3tHAkbktHVDNxJMOSFeCqimU/GivqcYa5ENQO/YYcApi0B scottieray@sray.lan" # SSH password for Ops Manager (ssh user is ubuntu)
 om_decryption_pwd: "VMware1!"                   # Decryption password for Ops Manager exported settings
 om_ntp_servers: us.pool.ntp.org                 # Comma-separated list of NTP Servers
 om_dns_servers: 10.0.1.250                  # Comma-separated list of DNS Servers
