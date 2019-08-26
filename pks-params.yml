@@ -59,6 +59,10 @@ az_3_name: comp02                        # Logical name of availability zone. No
 az_3_cluster_name: COMPUTE               # Name of cluster in vCenter for PKS
 az_3_rp_name: pks-comp-02                    # Resource pool name in vCenter for PKS
 
+az_4_name:                         # Logical name of availability zone. No spaces or special characters.
+az_4_cluster_name:                # Name of cluster in vCenter for PKS
+az_4_rp_name:      
+
 ntp_servers: us.pool.ntp.org      # Comma-separated list of NTP servers to use for VMs deployed by BOSH
 enable_vm_resurrector: true       # Whether to enable BOSH VM resurrector
 max_threads: 30                   # Max threads count for deploying VMs
