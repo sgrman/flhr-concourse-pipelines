@@ -1,7 +1,7 @@
 # Pipeline resource configuration
 pivnet_token: GkEzUB1ymWNVbztUevjF    # Pivnet token for downloading resources from Pivnet. Find this token at https://network.pivotal.io/users/dashboard/edit-profile
 opsman_major_minor_version: ^2\.6.*$    # PCF Ops Manager minor version to track
-pks_major_minor_version: ^1\.4.*$     # Use this once PKS v1.1 becomes GA
+pks_major_minor_version: ^1\.5.*$     # Use this once PKS v1.1 becomes GA
 
 # vCenter configuration
 vcenter_host: vc01.flhrnet.local       # vCenter host or IP
@@ -80,7 +80,7 @@ infra_nw_azs: mgmt,comp01,comp02           # Comma separated list of AZ's to be 
 
 nsx_networking_enabled: true              # (true|false) to use nsx networking feature. PKS v1.1+ requires it to be true
 nsx_mode: nsx-t                           # Valid values: nsx-t, nsx-v
-nsx_address: nsx-1.flhrnet.local          # address of NSX VIP address for management cluster
+nsx_address: nsx-vip.flhrnet.local        # address of NSX VIP address for management cluster
 nsx_username: admin                       # username for nsx access
 nsx_password: "VMware1!VMware1!"          # password for nsx access
 
