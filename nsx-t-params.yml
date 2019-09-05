@@ -20,7 +20,7 @@ netmask: 255.255.255.0
 # NSX manager cluster configs
 nsx_manager_ips: 10.0.1.31 # 3 node cluster is recommended. 1 is minimum, 3 is max
 nsx_manager_virtual_ip: 10.0.1.30
-nsx_manager_cluster_fqdn: "nsx-vip.flhrnet.local"
+nsx_manager_cluster_fqdn: nsx-vip.flhrnet.local
 nsx_manager_username: admin
 nsx_manager_password: "VMware1!VMware1!"
 nsx_manager_hostname_prefix: "nsx" # Generated hostname: nsxt-mgr-1.corp.local.io, will be FQDN
