@@ -207,7 +207,12 @@ pks_tile_wavefront_api_url: "https://vmware.wavefront.com/api" # wavefront api u
 pks_tile_wavefront_token: 06382415-1a65-48dd-a534-9ecee41ba39f  # wavefront access token
 pks_tile_wavefront_alert_targets: sray@vmware.com # email ids to sent alerts
 
+
+#pks_tile_telemetry:
 pks_tile_telemetry: enabled # can be enabled or disabled
+pks_ceip_level: disabled # Options: disabled | enabled | enhanced
+pks_purpose: demo_or_poc # Options: demo_or_poc | dev_or_pre_prod | prod | not_provided
+
 
 pks_tile_plan_details:
 - plan_detail:
