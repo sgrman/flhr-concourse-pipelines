@@ -1,4 +1,4 @@
-vops_suite_install_branch: master # use local_ova to use local nginx server with OVA's locally
+vops_suite_install_branch: local_ova # use local_ova to use local nginx server with OVA's locally
 
 ## myvmware.com
 myvmw_user: dl_admin@vmware.com
@@ -8,8 +8,7 @@ myvmw_pass: FT6MFRwzgK832!QU
 ova_webserver: "http://nginx"
 vrops_product: vmware-vrealize-operations ## DO NOT MODIFY
 vrops_ova_file_name: "vRealize-Operations-Manager-Appliance-7.5.0.13165949_OVF10.ova"
-vlog_product: vmware-vrealize-log-insight ## DO NOT MODIFY
-vlog_ova_file_name: "VMware-vRealize-Log-Insight-4.8.0-13036238_OVF10.ova"
+vlog_product: vmware-vrealize-log-insight ## DO NOT MODIFYvlog_ova_file_name: "VMware-vRealize-Log-Insight-4.8.0-13036238_OVF10.ova"
 
 ## vcenter settings
 vcenter_insecure: 1
@@ -20,50 +19,50 @@ vcenter_pwd: VMware1!
 vcenter_data_center: FLHRNET
 
 ## vrops ova settings
-vrops_datastore: vlab-nfs-ds-01
-vrops_resource_pool: /vlab-dc/host/vlab-mgmt-edge/Resources # /<vSphere-Datcenter/host/<vSphere-Cluster>/Resources/<vSphere-ResourcePool>
+vrops_datastore: FLHRNET_NFS01
+vrops_resource_pool: /FLHRNET/host/COMPUTE/Resources/core-vms # /<vSphere-Datcenter/host/<vSphere-Cluster>/Resources/<vSphere-ResourcePool>
 vrops_deploy_size: xsmall       # xsmall | small | medium | large | xlarge
 vrops_disk_provision: thin      # thin | thick
 vrops_ip_policy: fixedPolicy    # fixedPolicy | DHCP
-vrops_name: vlab-vrops-01       # VM Name
-vrops_network: vlab-mgmt        # VDS|VSS VM portgroup
-vrops_gateway: 192.168.64.1
-vrops_domain_name: vlab-vrops.vballin.com
-vrops_domain_search: vballin.com
-vrops_dns_server: 192.168.64.60
-vrops_ip_address: 192.168.64.50
+vrops_name: vrops01.flrhnet.local       # VM Name
+vrops_network: DVS_COMP_ESXi        # VDS|VSS VM portgroup
+vrops_gateway: 10.0.1.1
+vrops_domain_name: vrops01.flhrnet.local
+vrops_domain_search: flhrnet.local
+vrops_dns_server: 10.0.1.250
+vrops_ip_address: 10.0.1.4
 vrops_netmask: 255.255.255.0
 vrops_power_on: true
 #vrops_vm_folder:
 
 ## vrops configuration
 vrops_username: admin
-vrops_password: ((vlog_password))
+vrops_password: VMware1!
 vrops_ntp: pool.ntp.org
-vrops_license_key: ((vrops_key))
+vrops_license_key: GN00P-N8H10-N89E5-02004-3T41J
 
 ## vlog-insight ova settings
-vlog_datastore: vlab-nfs-ds-01
-vlog_resource_pool: /vlab-dc/host/vlab-mgmt-edge/Resources # /<vSphere-Datcenter/host/<vSphere-Cluster>/Resources/<vSphere-ResourcePool>
+vlog_datastore: FLHRNET_NFS01
+vlog_resource_pool: /FLHRNET/host/COMPUTE/Resources/core-vms # /<vSphere-Datcenter/host/<vSphere-Cluster>/Resources/<vSphere-ResourcePool>
 vlog_deploy_size: xsmall          # xsmall | small | medium | large
 vlog_disk_provision: thin         # thin | thick
 vlog_ip_policy: fixedPolicy       # fixedPolicy | DHCP
-vlog_vm_name: vlab-loginsight-01  # VM Name
-vlog_network: vlab-mgmt           # VDS|VSS VM portgroup
-vlog_gateway: 192.168.64.1
-vlog_domain: vballin.com
-vlog_domain_name: vlab-loginsight
-vlog_domain_search: vballin.com
-vlog_dns_server: 192.168.64.60
-vlog_ip_address: 192.168.64.105
+vlog_vm_name: log01.flhrnet.local  # VM Name
+vlog_network: DVS_COMP_ESXi           # VDS|VSS VM portgroup
+vlog_gateway: 10.0.1.1
+vlog_domain: flhrnet.local
+vlog_domain_name: log01.flhrnet.local
+vlog_domain_search: flhrnet.local
+vlog_dns_server: 10.0.1.250
+vlog_ip_address: 10.0.1.5
 vlog_netmask: 255.255.255.0
-vlog_root_pw: ((vlog_password))
+vlog_root_pw: VMware1!
 vlog_power_on: true
 #log_vm_folder:
 
 ## vlog configuration
 ntp_servers: "0.vmware.pool.ntp.org, 1.vmware.pool.ntp.org, 2.vmware.pool.ntp.org, 3.vmware.pool.ntp.org"
 vlog_username: admin
-vlog_password: ((vlog_password))
-vlog_email: nathan79@gmail.com
-vlog_license_key: ((vlog_key))
+vlog_password: VMware1!
+vlog_email: scottieray@me.com
+vlog_license_key: UM62N-JG011-28KCD-0A382-CXRJJ
