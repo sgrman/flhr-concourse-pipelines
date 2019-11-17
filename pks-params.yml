@@ -1,7 +1,7 @@
 # Pipeline resource configuration
 pivnet_token: GkEzUB1ymWNVbztUevjF    # Pivnet token for downloading resources from Pivnet. Find this token at https://network.pivotal.io/users/dashboard/edit-profile
-opsman_major_minor_version: ^2\.6.*$    # PCF Ops Manager minor version to track
-pks_major_minor_version: ^1\.5.*$     # Use this once PKS v1.1 becomes GA
+opsman_major_minor_version: ^2\.7.*$    # PCF Ops Manager minor version to track
+pks_major_minor_version: ^1\.6.*$     # Use this once PKS v1.1 becomes GA
 
 # vCenter configuration
 vcenter_host: vc01.flhrnet.local       # vCenter host or IP
@@ -187,26 +187,29 @@ pks_tile_no_proxy:
 
 # Use LDAP for PKS UAA
 # Default is to use internal uaa
-pks_tile_uaa_use_ldap: false # Change to true and fill following fields for using LDAP
-pks_tile_ldap_url:
-pks_tile_ldap_user:
-pks_tile_ldap_password:
-pks_tile_ldap_search_base:
-pks_tile_ldap_search_filter:
-pks_tile_ldap_group_search_base:
-pks_tile_ldap_group_search_filter:
+pks_tile_uaa_use_ldap: true # Change to true and fill following fields for using LDAP
+pks_tile_ldap_url: ldap://dc01.flhrnet.local  
+pks_tile_ldap_user: CN=svc-pks-ldap,OU=PKS,OU=PKS-FLHRNET,DC=flhrnet,DC=local
+pks_tile_ldap_password: VMware1!
+pks_tile_ldap_search_base: OU=PKS-FLHRNET,DC=flhrnet,DC=local
+pks_tile_ldap_search_filter: sAMAccountName=(0)
+pks_tile_ldap_group_search_base: OU=PKS-FLHRNET,DC=flhrnet,DC=local
+pks_tile_ldap_group_search_filter: member=(0)
 pks_tile_ldap_server_ssl_cert:
 pks_tile_ldap_server_ssl_cert_alias:
 pks_tile_ldap_email_domains:
-pks_tile_ldap_first_name_attribute:
-pks_tile_ldap_last_name_attribute:
-pks_tile_ldap_use_oidc: disabled
+pks_tile_ldap_first_name_attribute: givenName
+pks_tile_ldap_last_name_attribute: sn
+pks_tile_ldap_use_oidc: enabled
 
 # PKS Wavefront integration
 pks_tile_wavefront_api_url: "https://vmware.wavefront.com/api" # wavefront api url, empty is disabled
 pks_tile_wavefront_token: 06382415-1a65-48dd-a534-9ecee41ba39f  # wavefront access token
 pks_tile_wavefront_alert_targets: sray@vmware.com # email ids to sent alerts
 
+# Add AD groups to UAA
+pks_tile_admin_ad_group: "CN=K8sClusterAdmins,OU=PKS,OU=PKS-FLHRNET,DC=flhrnet,DC=local"
+pks_tile_manage_ad_group: "CN=DevOpsManagers,OU=PKS,OU=PKS-FLHRNET,DC=flhrnet,DC=local"
 
 #pks_tile_telemetry:
 pks_tile_telemetry: enabled # can be enabled or disabled
@@ -219,7 +222,7 @@ pks_tile_plan_details:
     name: "Dev"  # the name that appears for end users to choose
     plan_selector: plan1_selector # Dont change the value of selector - Needs to be planN_selector
     is_active: true
-    description: "Development AZ=comp01 Single Master"
+    description: "Development Cluster Template AZ=comp01 Single Master"
     # AZ can be only a single value for PKS v1.0
     # There can be a comma separated list for PKS v1.1 which supports multiple AZs
     az_placement: comp01  # Specify the AZ in which the cluster will be created, single for PKS v1.0
@@ -231,7 +234,8 @@ pks_tile_plan_details:
     master_instances: 1    # The number of K8s worker instances
     worker_instances: 2    # The number of K8s worker instances
     errand_vm_type: micro
-    addons_spec: "" # Kubernetes yml that contains specifications of addons to run on every cluster. This is an experimental feature. Please consider carefully before applying this to your plan
+    addons_spec: 
+    # Kubernetes yml that contains specifications of addons to run on every cluster. This is an experimental feature. Please consider carefully before applying this to your plan
     # Privileged containers run with host-like permissions.
     # Allowing your users to deploy privileged containers in clusters using this plan can create security vulnerabilities and may impact other tiles.
     # Use with caution.
@@ -249,7 +253,7 @@ pks_tile_plan_details:
     name: "Stage"  # the name that appears for end users to choose
     is_active: true
     plan_selector: plan2_selector # Dont change the value of selector - Needs to be planN_selector
-    description: "Staging Cluster AZ=comp01 Single Master"
+    description: "Staging Cluster Templage AZ=comp01 Single Master"
     # AZ can be only a single value for PKS v1.0
     # There can be a comma separated list for PKS v1.1 which supports multiple AZs
     az_placement: comp01  # Specify the AZ in which the cluster will be created, single for PKS v1.0
@@ -261,10 +265,10 @@ pks_tile_plan_details:
     master_instances: 1    # The number of K8s worker instances
     worker_instances: 3    # The number of K8s worker instances
     errand_vm_type: micro
-    addons_spec: # "kind: StorageClass
+    addons_spec:  "kind: StorageClass
     #apiVersion: storage.k8s.io/v1
     #metadata:
-    #name: thin
+    #name: thin-disk
     #annotations:
     #storageclass.kubernetes.io/is-default-class: "true""
  # Kubernetes yml that contains specifications of addons to run on every cluster. This is an experimental feature. Please consider carefully before applying this to your plan
@@ -281,8 +285,8 @@ pks_tile_plan_details:
 - plan_detail:
     name: "QA"  # the name that appears for end users to choose
     is_active: true
-    plan_selector: plan4_selector # Dont change the value of selector - Needs to be planN_selector
-    description: "QA Cluster AZ=comp02 Single-Master"
+    plan_selector: plan3_selector # Dont change the value of selector - Needs to be planN_selector
+    description: "QA Cluster AZ=comp02 Mulit-Master"
     # AZ can be only a single value for PKS v1.0
     # There can be a comma separated list for PKS v1.1 which supports multiple AZs
     az_placement: comp02  # Specify the AZ in which the cluster will be created, single for PKS v1.0
@@ -291,8 +295,8 @@ pks_tile_plan_details:
     persistent_disk_type: "10240" # Used in PKS 1.0
     master_persistent_disk_type: "10240" # Used in PKS 1.1+
     worker_persistent_disk_type: "102400" # Used in PKS 1.1+
-    master_instances: 1    # The number of K8s worker instances
-    worker_instances: 3    # The number of K8s worker instances
+    master_instances: 3    # The number of K8s worker instances
+    worker_instances: 5    # The number of K8s worker instances
     errand_vm_type: micro
     addons_spec: # "kind: StorageClass
     #apiVersion: storage.k8s.io/v1
@@ -314,8 +318,8 @@ pks_tile_plan_details:
 - plan_detail:
     name: "Prod"  # the name that appears for end users to choose
     is_active: true
-    plan_selector: plan3_selector # Dont change the value of selector - Needs to be planN_selector
-    description: "Production Cluster AZ=comp02  Multi-Master"
+    plan_selector: plan4_selector # Dont change the value of selector - Needs to be planN_selector
+    description: "Production Cluster Template AZ=comp02  Multi-Master"
     # AZ can be only a single value for PKS v1.0
     # There can be a comma separated list for PKS v1.1 which supports multiple AZs
     az_placement: comp02  # Specify the AZ in which the cluster will be created, single for PKS v1.0
@@ -391,7 +395,7 @@ pks_tile_plan_details:
 ######## PKS tile-specific parameters
 product_name: harbor-container-registry  # do not change
 product_slug: harbor-container-registry  # do not change
-harbor_product_version: ^1\.8.*$  # PKS tile version to install
+harbor_product_version: ^1\.9.*$  # PKS tile version to install
 product_globs: "*.pivotal"
 
 # Note: check companion "pks_vault_params.sh" script for automated credentials
