@@ -265,7 +265,7 @@ pks_tile_plan_details:
     master_instances: 1    # The number of K8s worker instances
     worker_instances: 3    # The number of K8s worker instances
     errand_vm_type: micro
-    addons_spec:  "kind: StorageClass
+    addons_spec:  #"kind: StorageClass
     #apiVersion: storage.k8s.io/v1
     #metadata:
     #name: thin-disk
