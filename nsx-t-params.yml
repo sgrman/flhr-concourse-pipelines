@@ -6,7 +6,7 @@ unified_appliance: true #set to true or false
 
 # format: "http://172.18.0.2"
 nsx_image_webserver: "http://nginx"
-ova_file_name: "nsx-unified-appliance-2.5.0.0.0.14663978.ova" #Uncomment this if downloaded file manually and placed under /home/concourse
+ova_file_name: "nsx-unified-appliance-2.5.1.0.0.15314292.ova" #Uncomment this if downloaded file manually and placed under /home/concourse
 ovftool_file_name: "VMware-ovftool-4.3.0-12320924-lin.x86_64.bundle"   #Uncomment this if downloaded file manually and placed under /home/concourse
 
 # NSX general network settings
